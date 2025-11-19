@@ -5,12 +5,12 @@ dotenv.config();
 
 const app = express();
 
+const PORT = process.env.PORT || 5001;
+
 app.get("/", (req, res) => {
   res.send("Test: server works");
 });
 
-console.log("Port: ", process.env.PORT);
-
-app.listen(5001, () => {
-  console.log("server running on PORT:5001");
+app.listen(PORT, () => {
+  console.log("server running on PORT:", PORT);
 });
