@@ -3,6 +3,7 @@ import SafeScreen from "@/components/SafeScreen";
 
 export default function RootLayout() {
   return (
+    //<Stack />
     <SafeScreen>
       <Stack screenOptions={{ headerShown: false }} />
     </SafeScreen>

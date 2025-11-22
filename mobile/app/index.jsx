@@ -18,7 +18,7 @@ export default function Index() {
         style={{ width: 100, height: 100 }}
       />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
