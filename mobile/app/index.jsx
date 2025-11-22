@@ -18,6 +18,10 @@ export default function Index() {
         source={{ uri: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8a2V5Ym9hcmR8ZW58MHx8MHx8fDA%3D" }}
         style={{ width: 100, height: 100 }}
       />
+      <Image
+        source={require("@/assets/images/react-logo.png")}
+        style={{ width: 100, height: 100 }}
+      />
     </View>
   );
 }
