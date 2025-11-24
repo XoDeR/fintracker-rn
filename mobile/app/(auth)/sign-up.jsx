@@ -58,9 +58,13 @@ export default function SignUpScreen() {
         await setActive({ session: signUpAttempt.createdSessionId })
         router.replace('/')
       } else {
-        // If the status is not complete, check why. User may need to
-        // complete further steps.
-        console.error(JSON.stringify(signUpAttempt, null, 2))
+        if (err.errors?.[0]?.code === "form_identifier_exists") {
+          setError("Email address already in use. Please try another");
+        } else {
+          // If the status is not complete, check why. User may need to
+          // complete further steps.
+          console.error(JSON.stringify(signUpAttempt, null, 2))
+        }
       }
     } catch (err) {
       // See https://clerk.com/docs/custom-flows/error-handling
