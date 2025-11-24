@@ -11,7 +11,7 @@ const app = express();
 
 app.use(rateLimiter);
 // need this middleware to parse requests
-app.use(express.json)
+app.use(express.json())
 
 const PORT = process.env.PORT || 5001;
 
