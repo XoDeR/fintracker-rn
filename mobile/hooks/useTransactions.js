@@ -1,7 +1,8 @@
 import { useCallback, useState } from "react";
 import { Alert } from "react-native";
 
-const API_URL = "http://localhost:5001/api";
+//const API_URL = "http://localhost:5001/api";
+const API_URL = "http://10.0.2.2:5001/api"; // from Android simulator 10.0.2.2 should be used to get to host's machine localhost
 
 export const useTransactions = (userId) => {
   const [transactions, setTransactions] = useState([]);
@@ -14,7 +15,7 @@ export const useTransactions = (userId) => {
 
   const fetchTransactions = useCallback(async () => {
     try {
-      response = await fetch(`${API_URL}/transactions/${userId}`);
+      const response = await fetch(`${API_URL}/transactions/${userId}`);
       const data = await response.json();
       setTransactions(data);
     } catch (error) {
@@ -24,7 +25,7 @@ export const useTransactions = (userId) => {
 
   const fetchSummary = useCallback(async () => {
     try {
-      response = await fetch(`${API_URL}/transactions/summary/${userId}`);
+      const response = await fetch(`${API_URL}/transactions/summary/${userId}`);
       const data = await response.json();
       setSummary(data);
     } catch (error) {
