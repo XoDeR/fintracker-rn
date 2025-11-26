@@ -8,11 +8,26 @@ import PageLoader from '../../components/PageLoader';
 import { styles } from '../../assets/styles/home.styles';
 import { Ionicons } from '@expo/vector-icons';
 import { BalanceCard } from '../../components/BalanceCard';
+import { TransactionItem } from '../../components/TransactionItem';
 
 export default function Page() {
   const { user } = useUser();
   const router = useRouter();
   const { transactions, summary, isLoading, loadData, deleteTransaction } = useTransactions(user.id);
+
+  //// test
+  transactions.push({
+    id: 1000,
+    title: "Movie",
+    category: "Entertainment",
+    amount: 50,
+    created_at: "10-10-2025"
+  });
+  ////
+
+  const handleDelete = (itemId) => {
+
+  }
 
   console.log("userId", user.id);
   console.log("transactions", transactions);
@@ -66,6 +81,9 @@ export default function Page() {
         style={styles.transactionsList}
         contentConteinerStyle={styles.transactionsListContent}
         data={transactions}
+        renderItem={({ item }) => (
+          <TransactionItem item={item} onDelete={handleDelete} />
+        )}
       />
 
       <SignedIn>
