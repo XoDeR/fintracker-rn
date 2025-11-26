@@ -4,8 +4,15 @@ import { initDb } from "./config/db.js";
 import rateLimiter from "./middleware/rateLimiter.js";
 
 import transactionsRoute from "./routes/transactionsRoute.js";
+import job from "./config/cron.js";
 
 dotenv.config();
+
+// if we are deployed
+if (process.env.NODE_ENV === "production") {
+  // currently disabled
+  //job.start();
+}
 
 const app = express();
 
@@ -17,7 +24,7 @@ const PORT = process.env.PORT || 5001;
 
 // For testing, health check
 app.get("/health", (req, res) => {
-  res.send("Test: server works");
+  res.status(200).json({ status: "ok", message: "Test: server works" });
 });
 
 app.use("/api/transactions", transactionsRoute)
