@@ -2,7 +2,12 @@ import { useCallback, useState } from "react";
 import { Alert } from "react-native";
 
 //const API_URL = "http://localhost:5001/api";
-const API_URL = "http://10.0.2.2:5001/api"; // from Android simulator 10.0.2.2 should be used to get to host's machine localhost
+//const backendUrl = BACKEND_URL || "http://10.0.2.2:5001"; // from Android simulator 10.0.2.2 should be used to get to host's machine localhost
+let backendUrl = process.env.EXPO_PUBLIC_BACKEND_URL; //"http://10.0.2.2:5001";
+backendUrl = "https://fintracker-backend-nodejs-deploy.onrender.com"
+const API_URL = `${backendUrl}/api`;
+
+console.log("API_URL", API_URL);
 
 export const useTransactions = (userId) => {
   const [transactions, setTransactions] = useState([]);
