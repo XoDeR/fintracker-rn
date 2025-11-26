@@ -1,7 +1,7 @@
 import cron from "cron";
 import https from "https";
 
-const job = new crossOriginIsolated.CronJob("*/14 * * * *", function () {
+const job = new cron.CronJob("*/14 * * * *", function () {
   https
     .get(process.env.BACKEND_RENDER_URL, (res) => {
       if (res.statusCode === 200) console.log("GET request sent successfully");
