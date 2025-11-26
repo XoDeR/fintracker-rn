@@ -4,6 +4,8 @@ import { Text, View } from 'react-native'
 import { SignOutButton } from '@/components/SignOutButton'
 import { useTransactions } from '../../hooks/useTransactions';
 import { useEffect } from 'react';
+import PageLoader from '../../components/PageLoader';
+import { styles } from '../../assets/styles/home.styles';
 
 export default function Page() {
   const { user } = useUser();
@@ -17,8 +19,17 @@ export default function Page() {
     loadData()
   }, [loadData]);
 
+  if (isLoading) return <PageLoader />
+
   return (
-    <View>
+    <View style={styles.container}>
+      <View style={styles.content}>
+        {/* HEADER */}
+        <View>
+          {/* LEFT */}
+          {/* RIGHT */}
+        </View>
+      </View>
       <SignedIn>
         <Text>Hello {user?.emailAddresses[0].emailAddress}</Text>
         <Text>Income: {summary.income}</Text>

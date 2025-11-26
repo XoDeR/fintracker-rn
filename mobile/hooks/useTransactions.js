@@ -16,7 +16,7 @@ export const useTransactions = (userId) => {
     income: 0,
     expenses: 0,
   });
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchTransactions = useCallback(async () => {
     try {
