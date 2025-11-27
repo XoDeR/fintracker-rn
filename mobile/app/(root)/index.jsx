@@ -89,6 +89,7 @@ export default function Page() {
           <TransactionItem item={item} onDelete={handleDelete} />
         )}
         ListEmptyComponent={<NoTransactionsFound />}
+        showVerticalScrollIndicator={false}
       />
 
       <SignedIn>
