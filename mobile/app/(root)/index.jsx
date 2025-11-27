@@ -9,6 +9,7 @@ import { styles } from '../../assets/styles/home.styles';
 import { Ionicons } from '@expo/vector-icons';
 import { BalanceCard } from '../../components/BalanceCard';
 import { TransactionItem } from '../../components/TransactionItem';
+import NoTransactionsFound from '../../components/NoTransactionsFound';
 
 export default function Page() {
   const { user } = useUser();
@@ -16,13 +17,13 @@ export default function Page() {
   const { transactions, summary, isLoading, loadData, deleteTransaction } = useTransactions(user.id);
 
   //// test
-  transactions.push({
-    id: 1000,
-    title: "Movie",
-    category: "Entertainment",
-    amount: 60,
-    created_at: "10-10-2025"
-  });
+  // transactions.push({
+  //   id: 1000,
+  //   title: "Movie",
+  //   category: "Entertainment",
+  //   amount: 60,
+  //   created_at: "10-10-2025"
+  // });
   ////
 
   const handleDelete = (id) => {
@@ -87,6 +88,7 @@ export default function Page() {
         renderItem={({ item }) => (
           <TransactionItem item={item} onDelete={handleDelete} />
         )}
+        ListEmptyComponent={<NoTransactionsFound />}
       />
 
       <SignedIn>
