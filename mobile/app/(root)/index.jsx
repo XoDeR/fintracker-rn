@@ -23,26 +23,12 @@ export default function Page() {
     setRefreshing(false);
   }
 
-  //// test
-  // transactions.push({
-  //   id: 1000,
-  //   title: "Movie",
-  //   category: "Entertainment",
-  //   amount: 60,
-  //   created_at: "10-10-2025"
-  // });
-  ////
-
   const handleDelete = (id) => {
     Alert.alert("Delete Transaction", "Are you sure you want to delete this transaction?", [
       { text: "Cancel", style: "cancel" },
       { text: "Delete", style: "destructive", onPress: () => deleteTransaction(id) }
     ]);
   }
-
-  console.log("userId", user.id);
-  console.log("transactions", transactions);
-  console.log("summary", summary);
 
   useEffect(() => {
     loadData()
@@ -52,60 +38,54 @@ export default function Page() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.content}>
-        {/* HEADER */}
-        <View style={styles.header}>
-          {/* LEFT */}
-          <View style={styles.headerLeft}>
-            <Image
-              source={require("../../assets/images/logo.png")}
-              style={styles.headerLogo}
-              resizeMode="contain"
-            />
-            <View style={styles.welcomeContainer}>
-              <Text style={styles.welcomeText}>Welcome,</Text>
-              <Text style={styles.usernameText}>
-                {user?.emailAddresses[0]?.emailAddress.split("@")[0]}
-              </Text>
+      <SignedIn>
+        <View style={styles.content}>
+          {/* HEADER */}
+          <View style={styles.header}>
+            {/* LEFT */}
+            <View style={styles.headerLeft}>
+              <Image
+                source={require("../../assets/images/logo.png")}
+                style={styles.headerLogo}
+                resizeMode="contain"
+              />
+              <View style={styles.welcomeContainer}>
+                <Text style={styles.welcomeText}>Welcome,</Text>
+                <Text style={styles.usernameText}>
+                  {user?.emailAddresses[0]?.emailAddress.split("@")[0]}
+                </Text>
+              </View>
+            </View>
+            {/* RIGHT */}
+            <View style={styles.headerRight}>
+              <TouchableOpacity style={styles.addButton} onPress={() => router.push("/create")}>
+                <Ionicons name="add" size={20} color="#FFF" />
+                <Text style={styles.addButtonText}>Add</Text>
+              </TouchableOpacity>
+              <SignOutButton />
             </View>
           </View>
-          {/* RIGHT */}
-          <View style={styles.headerRight}>
-            <TouchableOpacity style={styles.addButton} onPress={() => router.push("/create")}>
-              <Ionicons name="add" size={20} color="#FFF" />
-              <Text style={styles.addButtonText}>Add</Text>
-            </TouchableOpacity>
-            <SignOutButton />
+          {/* BALANCE CARD */}
+          <BalanceCard summary={summary} />
+          {/* RECENT TRANSACTIONS */}
+          <View style={styles.transactionsHeaderContainer}>
+            <Text style={styles.sectionTitle}>Recent Transactions</Text>
           </View>
         </View>
-        {/* BALANCE CARD */}
-        <BalanceCard summary={summary} />
-        {/* RECENT TRANSACTIONS */}
-        <View style={styles.transactionsHeaderContainer}>
-          <Text style={styles.sectionTitle}>Recent Transactions</Text>
-        </View>
-      </View>
 
-      {/* TRANSACTIONS LIST */}
-      {/* FlatList renders items lazily -- only those that are on the screen */}
-      <FlatList
-        style={styles.transactionsList}
-        contentConteinerStyle={styles.transactionsListContent}
-        data={transactions}
-        renderItem={({ item }) => (
-          <TransactionItem item={item} onDelete={handleDelete} />
-        )}
-        ListEmptyComponent={<NoTransactionsFound />}
-        showVerticalScrollIndicator={false}
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
-      />
-
-      <SignedIn>
-        <Text>Hello {user?.emailAddresses[0].emailAddress}</Text>
-        <Text>Income: {summary.income}</Text>
-        <Text>Balance: {summary.balance}</Text>
-        <Text>Expenses: {summary.expenses}</Text>
-        <SignOutButton />
+        {/* TRANSACTIONS LIST */}
+        {/* FlatList renders items lazily -- only those that are on the screen */}
+        <FlatList
+          style={styles.transactionsList}
+          contentConteinerStyle={styles.transactionsListContent}
+          data={transactions}
+          renderItem={({ item }) => (
+            <TransactionItem item={item} onDelete={handleDelete} />
+          )}
+          ListEmptyComponent={<NoTransactionsFound />}
+          showVerticalScrollIndicator={false}
+          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+        />
       </SignedIn>
       <SignedOut>
         <Link href="/(auth)/sign-in">
@@ -116,5 +96,6 @@ export default function Page() {
         </Link>
       </SignedOut>
     </View>
+
   )
 }

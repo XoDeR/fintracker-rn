@@ -13,7 +13,4 @@ export default function RootLayout() {
       <StatusBar style="dark" />
     </ClerkProvider>
   )
-
-  // to hide the header text
-  // return <Stack screenOptions={{ headerShown: false }}/>;
 }
