@@ -31,7 +31,6 @@ export async function createTransaction(req, res) {
         RETURNING *
       `;
 
-    console.log(first)
     res.status(201).json(transaction[0])
 
   } catch (error) {
